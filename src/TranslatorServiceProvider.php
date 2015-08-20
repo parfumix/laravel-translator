@@ -8,6 +8,15 @@ use Symfony\Component\Yaml\Yaml;
 class TranslatorServiceProvider extends ServiceProvider {
 
     public function boot() {
+        $this->publishes([
+            __DIR__.'/../configuration/general.yaml' => config_path('yaml/translator/general.yaml'),
+        ]);
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../configuration/general.yaml' , 'laravel-translator'
+        );
+
+        $this->publishDatabaseDriver();
     }
 
     /**
@@ -32,6 +41,24 @@ class TranslatorServiceProvider extends ServiceProvider {
                 $app['driver-translator-manager']
             );
         });
+    }
+
+    /**
+     * Publish database driver assets .
+     *
+     * @return $this
+     */
+    protected function publishDatabaseDriver() {
+
+        $this->publishes([
+            __DIR__.'/DriverAssets/Database/migrations' => database_path('migrations'),
+        ]);
+
+        $this->publishes([
+            __DIR__.'/DriverAssets/Database/seeds' => database_path('seeds'),
+        ]);
+
+        return $this;
     }
 
     /**
