@@ -31,16 +31,45 @@ class Translator {
     }
 
 
+    /**
+     * Get current active driver .
+     * @return mixed
+     * @throws TranslatorException
+     */
     public function driver() {
+        if(! $this->hasDriver())
+            throw new TranslatorException(_('No active drivers.'));
+
         return $this->driver();
     }
 
+    /**
+     * Check if translator has active driver .
+     *
+     * @return bool
+     */
+    public function hasDriver() {
+        return isset($this->driver);
+    }
+
+    /**
+     * Load driver by alias .
+     *
+     * @param $alias
+     * @return $this
+     */
     public function loadDriver($alias) {
         $this->driver = $this->getDriver($alias);
 
         return $this;
     }
 
+    /**
+     * Get driver by alias .
+     *
+     * @param $alias
+     * @return mixed
+     */
     public function getDriver($alias) {
         return $this
             ->driverManager
@@ -48,6 +77,15 @@ class Translator {
     }
 
 
+    /**
+     * Get translation by key .
+     *
+     * @param $key
+     * @param array $replacement
+     * @param null $locale
+     * @param null $driver
+     * @return mixed
+     */
     public function get($key, $replacement = array(), $locale = null, $driver = null) {
         if(! is_null($driver))
             $driver = $this->getDriver($driver) ?: $this->driver();
@@ -56,6 +94,14 @@ class Translator {
             ->get($key, $replacement, $locale);
     }
 
+    /**
+     * Check if has translation by key .
+     *
+     * @param $key
+     * @param null $locale
+     * @param null $driver
+     * @return mixed
+     */
     public function has($key, $locale = null, $driver = null) {
         if(! is_null($driver))
             $driver = $this->getDriver($driver) ?: $this->driver();
@@ -64,6 +110,14 @@ class Translator {
             ->has($key, $locale);
     }
 
+    /**
+     * Delete translation by key .
+     *
+     * @param $key
+     * @param null $locale
+     * @param null $driver
+     * @return mixed
+     */
     public function delete($key, $locale = null, $driver = null) {
         if(! is_null($driver))
             $driver = $this->getDriver($driver) ?: $this->driver();
@@ -73,6 +127,15 @@ class Translator {
         );
     }
 
+    /**
+     * Translate a key .
+     *
+     * @param $key
+     * @param $translation
+     * @param null $locale
+     * @param null $driver
+     * @return mixed
+     */
     public function translate($key, $translation, $locale = null, $driver = null) {
         if(! is_null($driver))
             $driver = $this->getDriver($driver) ?: $this->driver();
