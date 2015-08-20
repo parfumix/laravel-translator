@@ -3,6 +3,9 @@ default_driver: database
 
 # here will be registered all the drivers .
 drivers:
-  database: Translator\Drivers\Database
-  file: Translator\Drivers\File
-  google: Translator\Drivers\Google
+  database:
+    class: Translator\Drivers\Database
+  file:
+    class: Translator\Drivers\File
+  google:
+    class: Translator\Drivers\Google
