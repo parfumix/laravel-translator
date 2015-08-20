@@ -8,7 +8,6 @@ use Symfony\Component\Yaml\Yaml;
 class TranslatorServiceProvider extends ServiceProvider {
 
     public function boot() {
-
     }
 
     /**
@@ -27,7 +26,7 @@ class TranslatorServiceProvider extends ServiceProvider {
         });
 
         /** Register translator . */
-        $this->app->bind('translator', function($app) {
+        $this->app->singleton('laravel-translator', function($app) {
             return new Translator(
                 config('laravel-translator'),
                 $app['driver-translator-manager']
