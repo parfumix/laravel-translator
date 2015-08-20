@@ -2,9 +2,10 @@
 
 namespace Translator\Drivers;
 
+use Translator\Driver;
 use Translator\Translatable;
 
-class Database implements Translatable {
+class Database extends Driver implements Translatable {
 
     public function get($key, $replacement = array(), $locale = null) {
         // TODO: Implement get() method.
