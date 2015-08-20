@@ -8,6 +8,7 @@ use Symfony\Component\Yaml\Yaml;
 class TranslatorServiceProvider extends ServiceProvider {
 
     public function boot() {
+
     }
 
     /**
