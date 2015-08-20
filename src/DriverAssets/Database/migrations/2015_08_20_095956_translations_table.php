@@ -15,6 +15,12 @@ class TranslationsTable extends Migration {
             $table->integer('language_id')->unsigned();
             $table->string('key');
             $table->string('value');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 
