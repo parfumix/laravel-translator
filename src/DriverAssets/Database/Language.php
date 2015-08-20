@@ -8,6 +8,8 @@ class Language extends Model {
 
     protected $table = 'languages';
 
+    public $timestamps = false;
+
     public static $rules = [
         'name' => 'required',
         'slug' => 'required|unique:languages'
