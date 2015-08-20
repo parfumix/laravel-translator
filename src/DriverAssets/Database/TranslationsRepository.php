@@ -20,6 +20,16 @@ class TranslationsRepository {
     }
 
     /**
+     * Get all translations .
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function allTranslations() {
+        return $this->source
+            ->all();
+    }
+
+    /**
      * Get local by key .
      *
      * @param $key
