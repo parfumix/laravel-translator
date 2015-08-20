@@ -4,9 +4,11 @@ namespace Translator;
 
 use Flysap\Support\DriverManager;
 
+/**
+ * Class Manager
+ * @package Translator
+ */
 class Manager extends DriverManager {
-
-    protected $drivers;
 
     /**
      * @var
@@ -33,19 +35,4 @@ class Manager extends DriverManager {
         return $this->configuration['default_driver'];
     }
 
-    /**
-     * Set drivers .
-     *
-     * @param array $drivers
-     * @return $this
-     */
-    public function setDrivers(array $drivers) {
-        $this->drivers = $drivers;
-
-        return $this;
-    }
-
-    public function getDrivers() {
-        return $this->drivers;
-    }
 }
