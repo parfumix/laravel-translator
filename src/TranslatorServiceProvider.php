@@ -9,12 +9,8 @@ class TranslatorServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->publishes([
-            __DIR__.'/../configuration/general.yaml' => config_path('yaml/translator/general.yaml'),
+            __DIR__.'/../configuration' => config_path('yaml/translator'),
         ]);
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../configuration/general.yaml' , 'laravel-translator'
-        );
 
         $this->publishDatabaseDriver();
     }
