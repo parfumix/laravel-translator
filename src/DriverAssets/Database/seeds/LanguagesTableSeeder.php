@@ -2,8 +2,10 @@
 
 use DB;
 use Illuminate\Database\Seeder;
+use Translator\DriverAssets\Database\Language;
 
 class LanguagesTableSeeder extends Seeder {
+
     /**
      * Run the database seeds.
      *
@@ -12,8 +14,15 @@ class LanguagesTableSeeder extends Seeder {
     public function run() {
         DB::table('languages')->delete();
 
-        Translator\DriverAssets\Database\Language::create(['title' => 'Română',  'slug' => 'ro', 'active' => true, 'rank' => 1]);
-        Translator\DriverAssets\Database\Language::create(['title' => 'Русский', 'slug' => 'ru', 'active' => true, 'rank' => 2]);
-        Translator\DriverAssets\Database\Language::create(['title' => 'English', 'slug' => 'en', 'active' => true, 'rank' => 3]);
+        $languages = config('laravel-locale.locales');
+
+        array_walk($languages, function($slug, $options) {
+            Language::create([
+                'title'  => $options['title'],
+                'slug'   => $slug,
+                'active' => true,
+                'rank'   => 1
+            ]);
+        });
     }
 }
