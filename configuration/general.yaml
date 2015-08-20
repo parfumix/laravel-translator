@@ -1,5 +1,5 @@
 # here will be set up default driver .
-default_driver: database
+default_driver: file
 
 # here will be registered all the drivers .
 drivers:
