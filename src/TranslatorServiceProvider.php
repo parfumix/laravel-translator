@@ -8,7 +8,6 @@ use Symfony\Component\Yaml\Yaml;
 class TranslatorServiceProvider extends ServiceProvider {
 
     public function boot() {
-        $this->loadConfiguration();
     }
 
     /**
@@ -17,6 +16,7 @@ class TranslatorServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
+        $this->loadConfiguration();
 
         /** Register driver manager */
         $this->app->bind('driver-translator-manager', function() {
