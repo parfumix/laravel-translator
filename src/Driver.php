@@ -2,6 +2,7 @@
 
 namespace Translator;
 
+use Localization;
 use Flysap\Support\Traits\ElementAttributes;
 
 abstract class Driver {
@@ -55,5 +56,24 @@ abstract class Driver {
      */
     public function translate($key, $translation, $locale = null) {
         return true;
+    }
+
+
+    /**
+     * Get the default locale being used.
+     *
+     * @return string
+     */
+    public function locale() {
+        return $this->getLocale();
+    }
+
+    /**
+     * Get the default locale being used.
+     *
+     * @return string
+     */
+    public function getLocale() {
+        return Localization\get_active_locale();
     }
 }
