@@ -40,7 +40,7 @@ class Translator {
         if(! $this->hasDriver())
             throw new TranslatorException(_('No active drivers.'));
 
-        return $this->driver();
+        return $this->driver;
     }
 
     /**
@@ -87,8 +87,7 @@ class Translator {
      * @return mixed
      */
     public function get($key, $replacement = array(), $locale = null, $driver = null) {
-        if(! is_null($driver))
-            $driver = $this->getDriver($driver) ?: $this->driver();
+       $driver = ! is_null($driver) ? $this->getDriver($driver) : $this->driver();
 
         return $driver
             ->get($key, $replacement, $locale);
@@ -103,8 +102,7 @@ class Translator {
      * @return mixed
      */
     public function has($key, $locale = null, $driver = null) {
-        if(! is_null($driver))
-            $driver = $this->getDriver($driver) ?: $this->driver();
+        $driver = ! is_null($driver) ? $this->getDriver($driver) : $this->driver();
 
         return $driver
             ->has($key, $locale);
@@ -119,8 +117,7 @@ class Translator {
      * @return mixed
      */
     public function delete($key, $locale = null, $driver = null) {
-        if(! is_null($driver))
-            $driver = $this->getDriver($driver) ?: $this->driver();
+        $driver = ! is_null($driver) ? $this->getDriver($driver) : $this->driver();
 
         return $driver->delete(
             $key, $locale
@@ -137,8 +134,7 @@ class Translator {
      * @return mixed
      */
     public function translate($key, $translation, $locale = null, $driver = null) {
-        if(! is_null($driver))
-            $driver = $this->getDriver($driver) ?: $this->driver();
+        $driver = ! is_null($driver) ? $this->getDriver($driver) : $this->driver();
 
         return $driver->translate(
             $key, $translation, $locale
