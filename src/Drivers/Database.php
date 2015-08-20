@@ -54,11 +54,13 @@ class Database extends Driver implements Translatable {
     public function get($key, $replacement = array(), $locale = null) {
         $locale = ! is_null($locale) ? $locale : $this->locale();
 
-        $translation = $this->translationRepository
-            ->get($key, $locale);
+        $translation = $this->getRepository()
+            ->getByKey($key, $locale);
 
         if( isset($translation->value) )
             return $translation->value;
+
+        return $key;
     }
 
     /**

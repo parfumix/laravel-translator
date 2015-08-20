@@ -3,7 +3,7 @@
 namespace Translator;
 
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Yaml\Yaml;
+use Flysap\Support;
 
 class TranslatorServiceProvider extends ServiceProvider {
 
@@ -22,6 +22,10 @@ class TranslatorServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->loadConfiguration();
+
+        Support\merge_yaml_config_from(
+            config_path('yaml/translator/general.yaml') , 'laravel-translator'
+        );
 
         /** Register driver manager */
         $this->app->bind('driver-translator-manager', function() {
@@ -45,7 +49,6 @@ class TranslatorServiceProvider extends ServiceProvider {
      * @return $this
      */
     protected function publishDatabaseDriver() {
-
         $this->publishes([
             __DIR__.'/DriverAssets/Database/migrations' => database_path('migrations'),
         ]);
@@ -63,13 +66,9 @@ class TranslatorServiceProvider extends ServiceProvider {
      * @return $this
      */
     protected function loadConfiguration() {
-        $array = Yaml::parse(file_get_contents(
-            __DIR__ . '/../configuration/general.yaml'
-        ));
-
-        $config = $this->app['config']->get('laravel-translator', []);
-
-        $this->app['config']->set('laravel-translator', array_merge($array, $config));
+        Support\set_config_from_yaml(
+            __DIR__ . '/../configuration/general.yaml' , 'laravel-translator'
+        );
 
         return $this;
     }

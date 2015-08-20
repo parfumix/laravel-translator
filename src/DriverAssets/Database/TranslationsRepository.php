@@ -28,7 +28,8 @@ class TranslationsRepository {
      */
     public function getByKey($key, $locale) {
         return $this->source
-            ->join('languages', 'langauges.id = translations.language_id')
+            ->select()
+            ->join('languages', 'languages.id', '=','translations.language_id')
             ->where('languages.slug', $locale)
             ->whereKey($key)
             ->first();
