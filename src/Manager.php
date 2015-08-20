@@ -6,6 +6,8 @@ use Flysap\Support\DriverManager;
 
 class Manager extends DriverManager {
 
+    protected $drivers;
+
     /**
      * @var
      */
@@ -14,7 +16,7 @@ class Manager extends DriverManager {
     /**
      * @param array $configuration
      */
-    public function __constructor(array $configuration) {
+    public function __construct(array $configuration) {
         $this->configuration = $configuration;
 
         $this->setDrivers(
@@ -27,7 +29,7 @@ class Manager extends DriverManager {
      *
      * @return string
      */
-    public function getDefaultDriver() {
+    protected function getDefaultDriver() {
         return $this->configuration['default_driver'];
     }
 
@@ -37,9 +39,13 @@ class Manager extends DriverManager {
      * @param array $drivers
      * @return $this
      */
-    function setDrivers(array $drivers) {
+    public function setDrivers(array $drivers) {
         $this->drivers = $drivers;
 
         return $this;
+    }
+
+    public function getDrivers() {
+        return $this->drivers;
     }
 }
