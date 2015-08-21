@@ -40,10 +40,11 @@ abstract class Driver {
      * Delete translation by key .
      *
      * @param $key
+     * @param null $group
      * @param null $locale
      * @return bool
      */
-    public function delete($key, $locale = null) {
+    public function delete($key, $group = null, $locale = null) {
         return true;
     }
 
@@ -57,6 +58,21 @@ abstract class Driver {
      */
     public function translate($key, $translation, $locale = null) {
         return true;
+    }
+
+    /**
+     * Make replacement .
+     *
+     * @param $translation
+     * @param array $replacement
+     * @return mixed
+     */
+    protected function replace($translation, $replacement = []) {
+        foreach ($replacement as $key => $value) {
+            $translation = str_replace(':'.$key, $value, $translation);
+        }
+
+        return $translation;
     }
 
 

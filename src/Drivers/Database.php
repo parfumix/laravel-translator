@@ -139,7 +139,11 @@ class Database extends Driver implements Translatable {
     public function get($key, $replacement = array(), $locale = null) {
         $locale = $this->locale($locale);
 
-        return $this->getTranslation($key, $locale);
+        $translation = $this->getTranslation($key, $locale);
+
+        return $this->replace(
+            $translation, $replacement
+        );
     }
 
     /**
@@ -185,7 +189,7 @@ class Database extends Driver implements Translatable {
      * @return bool
      */
     public function translate($key, $translation, $locale = null) {
-        
+
         return true;
     }
 
