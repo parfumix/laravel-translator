@@ -29,9 +29,10 @@ abstract class Driver {
      * Check if has translation by key .
      *
      * @param $key
+     * @param null $locale
      * @return bool
      */
-    public function has($key) {
+    public function has($key, $locale = null) {
         return true;
     }
 
@@ -62,18 +63,20 @@ abstract class Driver {
     /**
      * Get the default locale being used.
      *
+     * @param null $default
      * @return string
      */
-    public function locale() {
-        return $this->getLocale();
+    public function locale($default = null) {
+        return $this->getLocale($default);
     }
 
     /**
      * Get the default locale being used.
      *
+     * @param null $default
      * @return string
      */
-    public function getLocale() {
-        return Localization\get_active_locale();
+    public function getLocale($default = null) {
+        return !is_null(Localization\get_active_locale()) ? Localization\get_active_locale() : $default;
     }
 }
