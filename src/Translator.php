@@ -112,15 +112,17 @@ class Translator {
      * Delete translation by key .
      *
      * @param $key
+     * @param null $group
      * @param null $locale
      * @param null $driver
      * @return mixed
+     * @throws TranslatorException
      */
-    public function delete($key, $locale = null, $driver = null) {
+    public function delete($key, $group = null, $locale = null, $driver = null) {
         $driver = ! is_null($driver) ? $this->getDriver($driver) : $this->driver();
 
         return $driver->delete(
-            $key, $locale
+            $key, $group, $locale
         );
     }
 

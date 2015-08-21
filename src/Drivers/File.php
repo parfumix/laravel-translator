@@ -17,6 +17,8 @@ class File extends Driver implements Translatable {
      * @return bool
      */
     public function get($key, $replacement = array(), $locale = null) {
+        $locale = $this->locale($locale);
+
         return Lang::get($key, $replacement, $locale);
     }
 
@@ -24,21 +26,13 @@ class File extends Driver implements Translatable {
      * Check if has translation by key .
      *
      * @param $key
-     * @return bool
-     */
-    public function has($key) {
-        return Lang::has($key);
-    }
-
-    /**
-     * Delete translation by key .
-     *
-     * @param $key
      * @param null $locale
      * @return bool
      */
-    public function delete($key, $locale = null) {
-        return true;
+    public function has($key, $locale = null) {
+        $locale = $this->locale($locale);
+
+        return Lang::has($key, $locale);
     }
 
     /**
@@ -50,6 +44,8 @@ class File extends Driver implements Translatable {
      * @return bool
      */
     public function translate($key, $translation, $locale = null) {
+        $locale = $this->locale($locale);
+
         return Lang::get($key, null, $locale);
     }
 

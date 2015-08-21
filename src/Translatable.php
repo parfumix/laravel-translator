@@ -18,18 +18,20 @@ interface Translatable {
      * Check if has translation by key .
      *
      * @param $key
+     * @param null $locale
      * @return mixed
      */
-    public function has($key);
+    public function has($key, $locale = null);
 
     /**
      * Delete translation by key .
      *
      * @param $key
+     * @param null $group
      * @param null $locale
      * @return mixed
      */
-    public function delete($key, $locale = null);
+    public function delete($key, $group = null, $locale = null);
 
     /**
      * Translate translation by key .
