@@ -77,6 +77,28 @@ abstract class Driver {
 
 
     /**
+     * Make api request to specific url .
+     *
+     * @param $url
+     * @param array $params
+     * @return mixed
+     */
+    protected function apiRequest($url, $params = array()) {
+        if(! isset($params['api_key']) && $this->hasAttribute('api_key'))
+            $params['key'] = $this->getAttribute('api_key');
+
+        $query = http_build_query($params, '&');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url . '?' . $query);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        return $output;
+    }
+
+    /**
      * Get the default locale being used.
      *
      * @param null $default
