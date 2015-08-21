@@ -26,7 +26,20 @@ class TranslationsRepository {
      */
     public function allTranslations() {
         return $this->source
-            ->all();
+            ->select('languages.slug as locale', 'translations.*')
+            ->join('languages', 'languages.id', '=','translations.language_id')
+            ->get();
+    }
+
+    /**
+     * Remove by id .
+     *
+     * @param $id
+     */
+    public function removeById($id) {
+        $this->source
+            ->find($id)
+            ->delete();
     }
 
     /**
@@ -34,14 +47,20 @@ class TranslationsRepository {
      *
      * @param $key
      * @param $locale
+     * @param null $group
      * @return mixed
      */
-    public function getByKey($key, $locale) {
-        return $this->source
-            ->select()
+    public function getByKey($key, $locale, $group = null) {
+        $query = $this->source
+            ->select('languages.slug as locale', 'translations.*')
             ->join('languages', 'languages.id', '=','translations.language_id')
             ->where('languages.slug', $locale)
-            ->whereKey($key)
+            ->whereKey($key);
+
+        if($group)
+            $query->where('group', $group);
+
+        return $query
             ->first();
     }
 }
