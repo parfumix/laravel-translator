@@ -8,5 +8,7 @@ drivers:
     cache_time: 60
   file:
     class: Translator\Drivers\File
-  google:
-    class: Translator\Drivers\Google
+  yandex:
+    class: Translator\Drivers\Yandex
+    api_key: trnsl.1.1.20150821T093139Z.6d084dbd2437a339.02ed4d33f9e183afe40e00ba9996e81b979b0f70
+    api_url: https://translate.yandex.net/api/v1.5/tr.json/translate
