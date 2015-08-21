@@ -13,6 +13,7 @@ class TranslationsTable extends Migration {
         Schema::create('translations', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('language_id')->unsigned();
+            $table->string('group');
             $table->string('key');
             $table->string('value');
 
