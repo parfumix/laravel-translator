@@ -5,6 +5,7 @@ default_driver: file
 drivers:
   database:
     class: Translator\Drivers\Database
+    cache_time: 60
   file:
     class: Translator\Drivers\File
   google:
