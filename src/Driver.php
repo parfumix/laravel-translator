@@ -117,4 +117,13 @@ abstract class Driver {
     public function getLocale($default = null) {
         return !is_null(Localization\get_active_locale()) ? Localization\get_active_locale() : $default;
     }
+
+    /**
+     * Get all locales .
+     *
+     * @return mixed
+     */
+    public function getLocales() {
+        return Localization\get_locales();
+    }
 }
