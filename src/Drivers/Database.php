@@ -177,6 +177,8 @@ class Database extends Driver implements Translatable {
             $this->getRepository()
                 ->removeById($translation->id);
 
+        #@todo need to refresh cache .
+
         return true;
     }
 
@@ -189,6 +191,7 @@ class Database extends Driver implements Translatable {
      * @return bool
      */
     public function translate($key, $translation, $locale = null) {
+        #@todo need to store in database and return translation .
 
         return true;
     }
