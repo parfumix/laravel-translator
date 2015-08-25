@@ -14,9 +14,7 @@ class TranslationsRepository {
     public function __construct(Model $source) {
         $this->source = $source;
 
-        $this->languageRepository = new LanguageRepository(
-            new Language
-        );
+        $this->languageRepository = app('lang-db-repo');
     }
 
     /**

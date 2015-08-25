@@ -4,6 +4,10 @@ namespace Translator;
 
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
+use Translator\DriverAssets\Database\Language;
+use Translator\DriverAssets\Database\LanguageRepository;
+use Translator\DriverAssets\Database\Translation;
+use Translator\DriverAssets\Database\TranslationsRepository;
 
 class TranslatorServiceProvider extends ServiceProvider {
 
@@ -26,6 +30,20 @@ class TranslatorServiceProvider extends ServiceProvider {
         Support\merge_yaml_config_from(
             config_path('yaml/translator/general.yaml') , 'laravel-translator'
         );
+
+        /** Register language repository . */
+        $this->app->bind('lang-db-repo', function() {
+            return new LanguageRepository(
+                new Language()
+            );
+        });
+
+        /** Register translations repository . */
+        $this->app->bind('translations-db-repo', function() {
+            return new TranslationsRepository(
+                new Translation()
+            );
+        });
 
         /** Register driver manager */
         $this->app->bind('driver-translator-manager', function() {

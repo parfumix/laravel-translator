@@ -28,9 +28,7 @@ class Database extends Driver implements Translatable {
     public function __construct($attributes = array()) {
         parent::__construct($attributes);
 
-        $this->translationRepository = new TranslationsRepository(
-            new Translation()
-        );
+        $this->translationRepository = app('translations-db-repo');
 
         $this->setTranslations();
     }
