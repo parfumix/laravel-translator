@@ -27,10 +27,6 @@ class TranslatorServiceProvider extends ServiceProvider {
     public function register() {
         $this->loadConfiguration();
 
-        Support\merge_yaml_config_from(
-            config_path('yaml/translator/general.yaml') , 'laravel-translator'
-        );
-
         /** Register language repository . */
         $this->app->bind('lang-db-repo', function() {
             return new LanguageRepository(
@@ -86,6 +82,10 @@ class TranslatorServiceProvider extends ServiceProvider {
     protected function loadConfiguration() {
         Support\set_config_from_yaml(
             __DIR__ . '/../configuration/general.yaml' , 'laravel-translator'
+        );
+
+        Support\merge_yaml_config_from(
+            config_path('yaml/translator/general.yaml') , 'laravel-translator'
         );
 
         return $this;
